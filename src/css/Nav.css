@@ -1,10 +1,34 @@
 .navbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: rgb(252, 90, 40);
 }
 
 .navbar h1 {
+  margin-left: 8px;
   padding: 8px;
   color: white;
+}
+
+.navbar-search {
+  margin: 8px 4px;
+  height: 24px;
+  width: 300px;
+}
+.navbar-search-btn {
+  font-size: 16px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  background-color: #2171a1;
+  color: white;
+  margin-right: 16px;
+}
+
+.navbar-search-btn:hover,
+.navbar-search-btn:active {
+  background-color: #06466c;
+  cursor: pointer;
 }

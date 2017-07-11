@@ -5,7 +5,12 @@ const Nav = props => {
   return (
     <div className="navbar">
       <h1>Open Weather</h1>
-      <input type="text" />
+      <form>
+        <input type="text" className="navbar-search" placeholder="Enter a city and state" />
+        <button type="submit" className="navbar-search-btn">
+          Submit
+        </button>
+      </form>
     </div>
   );
 };
