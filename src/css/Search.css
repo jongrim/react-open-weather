@@ -1,17 +1,4 @@
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgb(252, 90, 40);
-}
-
-.navbar h1 {
-  margin-left: 8px;
-  padding: 8px;
-  color: white;
-}
-
-.navbar-search {
+.search-field {
   margin: 8px 4px;
   height: 36px;
   width: 150px;
@@ -20,7 +7,8 @@
   padding: 0 8px;
   border: 1px solid #ccc;
 }
-.navbar-search-btn {
+.search-btn {
+  font-weight: 200;
   font-size: 16px;
   height: 30px;
   border-radius: 6px;
@@ -31,8 +19,8 @@
   margin-right: 16px;
 }
 
-.navbar-search-btn:hover,
-.navbar-search-btn:active {
+.search-btn:hover,
+.search-btn:active {
   background-color: #06466c;
   cursor: pointer;
 }
