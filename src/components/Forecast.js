@@ -14,9 +14,7 @@ class Forecast extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.location.search);
     const { city: searchTerm = '' } = queryString.parse(this.props.location.search);
-    console.log(searchTerm);
     this.setState(() => {
       return {
         searchTerm: searchTerm
@@ -25,7 +23,6 @@ class Forecast extends Component {
   }
 
   getAllWeather() {
-    console.log(this);
     axios
       .all([this.getCurrentWeather(), this.getForecastWeather()])
       .then(
@@ -40,6 +37,10 @@ class Forecast extends Component {
       .catch(err => {
         console.error(err);
       });
+  }
+
+  componenDidUpdate() {
+    console.log(this.props.location.search);
   }
 
   getCurrentWeather() {
@@ -61,10 +62,22 @@ class Forecast extends Component {
 
     return (
       <div>
-        <h1>Forecast</h1>
+        <h1>
+          {this.state.searchTerm}
+        </h1>
         {!(current && forecast) && <Loading text="Sticking our hand out the window" />}
-        {current && JSON.stringify(current)}
-        {forecast && JSON.stringify(forecast)}
+        {current &&
+          forecast &&
+          this.state.forecast.list.map((item, i) => {
+            return (
+              <div key={i}>
+                <img src={`${process.env.PUBLIC_URL}/images/weather-icons/${item.weather[0].icon}.svg`} alt="Icon" />
+                <p>
+                  {item.weather[0].description}
+                </p>
+              </div>
+            );
+          })}
       </div>
     );
   }
