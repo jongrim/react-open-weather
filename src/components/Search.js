@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import '../css/Search.css';
-import axios from 'axios';
-
-const weatherKey = '348c880899f24360d8ade9d6e84acc09';
 
 class Search extends Component {
   constructor(props) {
@@ -11,7 +9,6 @@ class Search extends Component {
       searchTerm: ''
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(evt) {
@@ -20,34 +17,6 @@ class Search extends Component {
     this.setState(function() {
       return { searchTerm: val };
     });
-  }
-
-  handleSubmit(evt) {
-    evt.preventDefault();
-    axios
-      .all([this.getCurrentWeather(), this.getForecastWeather()])
-      .then(
-        axios.spread((cur, forecast) => {
-          console.log(cur);
-          console.log(forecast);
-        })
-      )
-      .catch(err => {
-        console.error(err);
-      });
-  }
-
-  getCurrentWeather() {
-    return axios.get(
-      `http://api.openweathermap.org/data/2.5/weather?q=${this.state.searchTerm}&type=accurate&APPID=${weatherKey}`
-    );
-  }
-
-  getForecastWeather() {
-    return axios.get(
-      `http://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state
-        .searchTerm}&type=accurate&APPID=${weatherKey}&cnt=5`
-    );
   }
 
   render() {
@@ -61,9 +30,11 @@ class Search extends Component {
             value={this.state.searchTerm}
             onChange={this.handleChange}
           />
-          <button type="submit" className="search-btn" onClick={this.handleSubmit}>
-            Get Weather
-          </button>
+          <Link to={{ pathname: '/forecast', search: `?city=${this.state.searchTerm}` }}>
+            <button type="submit" className="search-btn">
+              Get Weather
+            </button>
+          </Link>
         </form>
       </div>
     );
