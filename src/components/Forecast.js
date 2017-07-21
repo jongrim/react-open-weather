@@ -39,8 +39,13 @@ class Forecast extends Component {
       });
   }
 
-  componenDidUpdate() {
-    console.log(this.props.location.search);
+  componentDidUpdate() {
+    const { city: searchTerm = '' } = queryString.parse(this.props.location.search);
+    if (searchTerm !== this.state.searchTerm) {
+      this.setState(() => {
+        return { searchTerm: searchTerm };
+      }, this.getAllWeather);
+    }
   }
 
   getCurrentWeather() {
