@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import '../css/Weather.css';
+import React from 'react';
+import '../css/Home.css';
 import Search from './Search';
 
 const Home = props => {
   return (
-    <div className="weather">
+    <div className="home">
       <h1>Enter a City and State</h1>
       <Search />
     </div>
