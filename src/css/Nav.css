@@ -38,3 +38,7 @@
   background-color: #06466c;
   cursor: pointer;
 }
+
+.navbar a {
+  text-decoration: none;
+}

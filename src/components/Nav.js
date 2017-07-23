@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../css/Nav.css';
 import Search from './Search';
 
 const Nav = props => {
   return (
     <div className="navbar">
-      <h1>Open Weather</h1>
+      <Link to="/">
+        <h1>Open Weather</h1>
+      </Link>
       <Search />
     </div>
   );
