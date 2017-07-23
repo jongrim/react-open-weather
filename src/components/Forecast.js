@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Loading from './Loading';
 import '../css/Forecast.css';
@@ -62,14 +63,20 @@ class Forecast extends Component {
             this.state.forecast.list.map((item, i) => {
               return (
                 <div key={i}>
-                  <img
-                    style={{ height: '50px' }}
-                    src={`${process.env.PUBLIC_URL}/images/weather-icons/${item.weather[0].icon}.svg`}
-                    alt="Icon"
-                  />
-                  <p style={{ color: 'white' }}>
-                    {item.weather[0].description.toUpperCase()}
-                  </p>
+                  <Link
+                    to={{
+                      pathname: `/detail/${this.state.searchTerm}`,
+                      state: { weather: item }
+                    }}>
+                    <img
+                      style={{ height: '50px' }}
+                      src={`${process.env.PUBLIC_URL}/images/weather-icons/${item.weather[0].icon}.svg`}
+                      alt="Icon"
+                    />
+                    <p style={{ color: 'white' }}>
+                      {item.weather[0].description.toUpperCase()}
+                    </p>
+                  </Link>
                 </div>
               );
             })}
