@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Loading from './Loading';
+import '../css/Forecast.css';
 const queryString = require('query-string');
 
 const weatherKey = '348c880899f24360d8ade9d6e84acc09';
@@ -66,23 +67,29 @@ class Forecast extends Component {
     const forecast = this.state.forecast;
 
     return (
-      <div>
+      <div className="container">
         <h1>
           {this.state.searchTerm}
         </h1>
-        {!(current && forecast) && <Loading text="Sticking our hand out the window" />}
-        {current &&
-          forecast &&
-          this.state.forecast.list.map((item, i) => {
-            return (
-              <div key={i}>
-                <img src={`${process.env.PUBLIC_URL}/images/weather-icons/${item.weather[0].icon}.svg`} alt="Icon" />
-                <p>
-                  {item.weather[0].description}
-                </p>
-              </div>
-            );
-          })}
+        <div className="forecast">
+          {!(current && forecast) && <Loading text="Sticking our hand out the window" />}
+          {current &&
+            forecast &&
+            this.state.forecast.list.map((item, i) => {
+              return (
+                <div key={i}>
+                  <img
+                    style={{ height: '50px' }}
+                    src={`${process.env.PUBLIC_URL}/images/weather-icons/${item.weather[0].icon}.svg`}
+                    alt="Icon"
+                  />
+                  <p style={{ color: 'white' }}>
+                    {item.weather[0].description.toUpperCase()}
+                  </p>
+                </div>
+              );
+            })}
+        </div>
       </div>
     );
   }
