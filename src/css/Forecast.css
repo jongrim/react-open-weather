@@ -3,6 +3,13 @@
   justify-content: space-around;
   align-items: baseline;
   flex-wrap: wrap;
+  color: white;
+  font-size: 24px;
+  font-weight: 200;
+}
+
+.container a {
+  text-decoration: none;
 }
 
 .container {

@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Loading from './Loading';
 import '../css/Forecast.css';
+import { getDate } from '../utils/utils.js';
+
+const _ = require('lodash');
 const queryString = require('query-string');
 
 const weatherKey = '348c880899f24360d8ade9d6e84acc09';
@@ -63,6 +66,9 @@ class Forecast extends Component {
             this.state.forecast.list.map((item, i) => {
               return (
                 <div key={i}>
+                  <p>
+                    {getDate(item.dt)}
+                  </p>
                   <Link
                     to={{
                       pathname: `/detail/${this.state.searchTerm}`,
@@ -74,7 +80,7 @@ class Forecast extends Component {
                       alt="Icon"
                     />
                     <p style={{ color: 'white' }}>
-                      {item.weather[0].description.toUpperCase()}
+                      {_.capitalize(item.weather[0].description)}
                     </p>
                   </Link>
                 </div>
