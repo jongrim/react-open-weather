@@ -25,16 +25,15 @@ class Forecast extends Component {
 
   getAllWeather() {
     axios
-      .all([this.getCurrentWeather(), this.getForecastWeather()])
-      .then(
-        axios.spread((cur, forecast) => {
-          console.log(cur);
-          console.log(forecast);
-          this.setState(() => {
-            return { current: cur.data, forecast: forecast.data };
-          });
-        })
+      .get(
+        `http://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state
+          .searchTerm}&type=accurate&APPID=${weatherKey}&cnt=5`
       )
+      .then(res => {
+        this.setState(() => {
+          return { forecast: res.data };
+        });
+      })
       .catch(err => {
         console.error(err);
       });
@@ -49,21 +48,7 @@ class Forecast extends Component {
     }
   }
 
-  getCurrentWeather() {
-    return axios.get(
-      `http://api.openweathermap.org/data/2.5/weather?q=${this.state.searchTerm}&type=accurate&APPID=${weatherKey}`
-    );
-  }
-
-  getForecastWeather() {
-    return axios.get(
-      `http://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state
-        .searchTerm}&type=accurate&APPID=${weatherKey}&cnt=5`
-    );
-  }
-
   render() {
-    const current = this.state.current;
     const forecast = this.state.forecast;
 
     return (
@@ -72,9 +57,8 @@ class Forecast extends Component {
           {this.state.searchTerm}
         </h1>
         <div className="forecast">
-          {!(current && forecast) && <Loading text="Sticking our hand out the window" />}
-          {current &&
-            forecast &&
+          {!forecast && <Loading text="Sticking our hand out the window" />}
+          {forecast &&
             this.state.forecast.list.map((item, i) => {
               return (
                 <div key={i}>

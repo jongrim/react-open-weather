@@ -4,6 +4,7 @@ import '../css/App.css';
 import Nav from './Nav';
 import Home from './Home';
 import Forecast from './Forecast';
+import Detail from './Detail';
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
           <Nav />
           <Route exact path="/" component={Home} />
           <Route path="/forecast" component={Forecast} />
+          <Route path="/detail/:cityName" component={Detail} />
         </div>
       </Router>
     );
