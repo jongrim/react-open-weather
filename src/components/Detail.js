@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { getDate, convertTemp } from '../utils/utils.js';
 import Loading from './Loading';
 import '../css/Detail.css';
+import { getDetail } from '../utils/api.js';
 
 const _ = require('lodash');
-
-const weatherKey = '348c880899f24360d8ade9d6e84acc09';
 
 class Detail extends Component {
   constructor(props) {
@@ -25,16 +23,13 @@ class Detail extends Component {
 
   componentDidMount() {
     if (this.state.weather) return;
-    axios
-      .get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&type=accurate&APPID=${weatherKey}`)
-      .then(res => {
-        this.setState(() => {
-          return { current: res.data };
-        });
-      })
-      .catch(err => {
-        console.log(err);
+    getDetail(this.state.city).then(data => {
+      this.setState(() => {
+        return {
+          current: data
+        };
       });
+    });
   }
 
   render() {

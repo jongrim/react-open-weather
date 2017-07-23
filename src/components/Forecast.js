@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import Loading from './Loading';
 import '../css/Forecast.css';
 import { getDate } from '../utils/utils.js';
+import { getForecast } from '../utils/api.js';
 
 const _ = require('lodash');
 const queryString = require('query-string');
-
-const weatherKey = '348c880899f24360d8ade9d6e84acc09';
 
 class Forecast extends Component {
   constructor(props) {
@@ -24,23 +22,17 @@ class Forecast extends Component {
       return {
         searchTerm: searchTerm
       };
-    }, this.getAllWeather);
+    }, this.getWeather);
   }
 
-  getAllWeather() {
-    axios
-      .get(
-        `http://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state
-          .searchTerm}&type=accurate&APPID=${weatherKey}&cnt=5`
-      )
-      .then(res => {
-        this.setState(() => {
-          return { forecast: res.data };
-        });
-      })
-      .catch(err => {
-        console.error(err);
+  getWeather() {
+    getForecast(this.state.searchTerm).then(res => {
+      this.setState(() => {
+        return {
+          forecast: res.data
+        };
       });
+    });
   }
 
   componentDidUpdate() {
