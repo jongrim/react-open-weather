@@ -40,7 +40,7 @@ class Forecast extends Component {
     if (searchTerm !== this.state.searchTerm) {
       this.setState(() => {
         return { searchTerm: searchTerm };
-      }, this.getAllWeather);
+      }, this.getWeather);
     }
   }
 
