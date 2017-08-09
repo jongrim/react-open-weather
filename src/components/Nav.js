@@ -7,7 +7,7 @@ const Nav = props => {
   return (
     <div className="navbar">
       <Link to="/">
-        <h1>Open Weather</h1>
+        <h1>React Weather</h1>
       </Link>
       <Search />
     </div>
