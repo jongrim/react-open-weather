@@ -17,7 +17,9 @@ class Forecast extends Component {
   }
 
   componentDidMount() {
-    const { city: searchTerm = '' } = queryString.parse(this.props.location.search);
+    const { city: searchTerm = '' } = queryString.parse(
+      this.props.location.search
+    );
     this.setState(() => {
       return {
         searchTerm: searchTerm
@@ -36,7 +38,9 @@ class Forecast extends Component {
   }
 
   componentDidUpdate() {
-    const { city: searchTerm = '' } = queryString.parse(this.props.location.search);
+    const { city: searchTerm = '' } = queryString.parse(
+      this.props.location.search
+    );
     if (searchTerm !== this.state.searchTerm) {
       this.setState(() => {
         return { searchTerm: searchTerm };
@@ -68,7 +72,9 @@ class Forecast extends Component {
                     }}>
                     <img
                       style={{ height: '50px' }}
-                      src={`${process.env.PUBLIC_URL}/images/weather-icons/${item.weather[0].icon}.svg`}
+                      src={`${process.env
+                        .PUBLIC_URL}/images/weather-icons/${item.weather[0]
+                        .icon}.svg`}
                       alt="Icon"
                     />
                     <p style={{ color: 'white' }}>
