@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const weatherKey = '348c880899f24360d8ade9d6e84acc09';
+const weatherKey = '';
 
 export function getForecast(searchTerm) {
   return axios.get(
